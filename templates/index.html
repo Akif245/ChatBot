@@ -1,0 +1,355 @@
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Chatbot</title>
+<style>
+
+    /* Light Theme (default) */
+:root {
+    --bg: white;
+    --text: black;
+    --header: #0078ff;
+    --chat-body: #f5f5f5;
+}
+
+/* Dark Theme */
+.dark {
+    --bg: #1e1e1e;
+    --text: white;
+    --header: #3333aa;
+    --chat-body: #2a2a2a;
+}
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+/* Chat button */
+#chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #0078ff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Chat popup box */
+#chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+}
+
+/* Header */
+#chat-header {
+    background: #0078ff;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Chat area */
+#chat-body {
+    height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Input area */
+#chat-input {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+#chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+}
+
+#chat-input button {
+    background: #0078ff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+#toggle-dark {
+    position: absolute;
+    right: 35px;
+    top: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+</style>
+</head>
+<body>
+    <h1>Welcome to XYZ College</h1>
+
+<!-- Chat Button -->
+<!-- <button id="chat-btn" onclick="openChat()">💬</button>  -->
+
+
+<!-- Chat Popup -->
+<!-- <div id="chat-popup">
+    <div id="chat-header">
+        College FAQ Chatbot 
+                <span id="toggle-dark" onclick="toggleDark()">🌙</span>
+
+        <span style="float:right;cursor:pointer;" onclick="closeChat()">✖</span>
+        <button id="chat-btn" onclick="closeChat()">💬</button>
+    </div>
+    <div id="chat-body"></div>
+    <div id="chat-input">
+        <input type="text" id="question" placeholder="Ask something...">
+        <button onclick="sendQuestion()">Send</button>
+    </div>
+</div>
+
+<script>
+function openChat(){
+    document.getElementById("chat-popup").style.display = "block";
+}
+
+function closeChat(){
+    document.getElementById("chat-popup").style.display = "none";
+}
+
+function sendQuestion(){
+    let q = document.getElementById("question").value;
+    if(q.trim() === "") return;
+
+    function toggleDark(){
+    document.body.classList.toggle("dark");
+}
+
+    let chatBody = document.getElementById("chat-body");
+    chatBody.innerHTML += "<p><b>You:</b> " + q + "</p>";
+
+    fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({question:q})
+    })
+    .then(res => res.json())
+    .then(data => {
+        chatBody.innerHTML += "<p><b>Bot:</b> " + data.answer + "</p>";
+        chatBody.scrollTop = chatBody.scrollHeight;
+    });
+
+    document.getElementById("question").value = "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Chatbot</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Light Theme (default) */
+:root {
+    --bg: white;
+    --text: black;
+    --header: #0078ff;
+    --chat-body: #f5f5f5;
+}
+
+/* Dark Theme */
+.dark {
+    --bg: #1e1e1e;
+    --text: white;
+    --header: #3333aa;
+    --chat-body: #2a2a2a;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Chat button */
+#chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--header);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Chat popup */
+#chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    background: var(--bg);
+    border: 1px solid #555;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+
+/* Header */
+#chat-header {
+    background: var(--header);
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Chat area */
+#chat-body {
+    height: 260px;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 14px;
+    background: var(--chat-body);
+}
+
+/* Input area */
+#chat-input {
+    display: flex;
+    border-top: 1px solid #555;
+}
+
+#chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+    background: var(--bg);
+    color: var(--text);
+}
+
+#chat-input button {
+    background: var(--header);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* Dark mode toggle button */
+#toggle-dark {
+    position: absolute;
+    right: 35px;
+    top: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<!-- Chat Button -->
+<button id="chat-btn" onclick="openChat()">💬</button>
+
+<!-- Chat Popup -->
+<div id="chat-popup">
+    <div id="chat-header">
+        College FAQ Chatbot 
+        <span id="toggle-dark" onclick="toggleDark()">🌙</span>
+        <span style="float:right;cursor:pointer;" onclick="closeChat()">✖</span>
+        <button id="chat-btn" onclick="closeChat()">💬</button>
+
+    </div>
+
+    <div id="chat-body"></div>
+
+    <div id="chat-input">
+        <input type="text" id="question" placeholder="Ask something...">
+        <button onclick="sendQuestion()">Send</button>
+    </div>
+</div>
+
+<script>
+function openChat(){
+    document.getElementById("chat-popup").style.display = "block";
+}
+
+function closeChat(){
+    document.getElementById("chat-popup").style.display = "none";
+}
+
+function toggleDark(){
+    document.body.classList.toggle("dark");
+}
+
+function sendQuestion(){
+    let q = document.getElementById("question").value;
+    if(q.trim()==="") return;
+
+    let chatBody = document.getElementById("chat-body");
+    chatBody.innerHTML += "<p><b>You:</b> " + q + "</p>";
+
+    fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({question:q})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        chatBody.innerHTML += "<p><b>Bot:</b> " + data.answer + "</p>";
+        chatBody.scrollTop = chatBody.scrollHeight;
+    });
+
+    document.getElementById("question").value="";
+}
+</script>
+
+</body>
+</html>
+
