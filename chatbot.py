@@ -64,7 +64,7 @@ from sentence_transformers import SentenceTransformer
 from transformers import pipeline
 
 # Embedding model
-embed_model = SentenceTransformer('all-MiniLM-L6-v2')
+embed_model = SentenceTransformer('paraphrase-MiniLM-L3-v2')
 
 # VERY light LLM for Render free tier
 generator = pipeline("text2text-generation", model="google/flan-t5-small")
